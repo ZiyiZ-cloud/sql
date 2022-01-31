@@ -1,0 +1,53 @@
+--psql < soccer.sql
+
+DROP DATABASE IF EXISTS soccer;
+
+CREATE DATABASE soccer;
+
+\c soccer;
+
+CREATE TABLE team
+(
+  id SERIAL PRIMARY KEY,
+  team text not null
+  rankings integer not null
+);
+
+CREATE TABLE player
+(
+  id SERIAL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
+);
+
+CREATE TABLE referee
+(
+  id SERIAL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL
+);
+
+CREATE TABLE match
+(
+  id SERIAL PRIMARY KEY,
+  match integer not null,
+  team_1 integer references team,
+  team_2 integer references team,
+  referee_id integer references referee
+);
+
+CREATE TABLE goal
+(
+  id SERIAL PRIMARY KEY,
+  match integer not null,
+  player_id integer references player
+);
+
+CREATE TABLE season
+(
+    id SERIAL PRIMARY KEY,
+    start_dates text not null,
+    end_dates text not null
+)
+
+
